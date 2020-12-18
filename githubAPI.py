@@ -17,20 +17,29 @@ def repoToStr(repo):
 	output += ("Star Count: " + str(repo.stargazers_count) + "\n") 
 	return output
 
-def getUserRepos(g):
-	user = g.get_user()	
+def getUserRepos(user):
 	output = ""
 	for repo in user.get_repos():
-		#output += (str(repo) + "\n")
 		output += repoToStr(repo)
 	return output
 
-#username = input("Enter GitHub username: ")
-#password = input("Enter GitHub password: ")
+def getTokenRepos(user):
+	user = g.get_user()	
+	output = ""
+	for repo in user.get_repos():
+		output += repoToStr(repo)
+	return output
 
-token = input("Enter Github token: ")
-g = Github(token)
+g = Github()
 
-#pprint(getUserData(username)) 
-#print(getUserRepos(username, password))
-print(getUserRepos(g))
+try:
+	tokentext = open("token.txt")
+except FileNotFoundError:
+	print("Token file not found.")
+	username = input("Enter GitHub username: ")
+	user = g.get_user(username)	
+	print(getUserRepos(user))
+else:
+	token = tokentext.readline()
+	g = Github(token)
+	print(getTokenRepos(g))
