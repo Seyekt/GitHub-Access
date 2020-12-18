@@ -17,17 +17,20 @@ def repoToStr(repo):
 	output += ("Star Count: " + str(repo.stargazers_count) + "\n") 
 	return output
 
-def getUserRepos(username):
-	g = Github()
-	user = g.get_user(username)	
+def getUserRepos(g):
+	user = g.get_user()	
 	output = ""
 	for repo in user.get_repos():
 		#output += (str(repo) + "\n")
 		output += repoToStr(repo)
 	return output
 
+#username = input("Enter GitHub username: ")
+#password = input("Enter GitHub password: ")
 
-username = input("Enter GitHub username: ")
+token = input("Enter Github token: ")
+g = Github(token)
 
 #pprint(getUserData(username)) 
-print(getUserRepos(username))
+#print(getUserRepos(username, password))
+print(getUserRepos(g))
