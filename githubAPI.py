@@ -10,6 +10,9 @@ def getUserData(username):
 def repoToStr(repo):
 	output = ""
 	output += ("Repository Name: " + repo.full_name + "\n")
+	output += ("Date created: " + str(repo.created_at) + "\n") 
+	output += ("Date Last Pushed: " + str(repo.pushed_at) + "\n") 
+	output += ("Star Count: " + str(repo.stargazers_count) + "\n") 
 	return output
 
 def getUserRepos(username):
@@ -18,7 +21,7 @@ def getUserRepos(username):
 	output = ""
 	for repo in user.get_repos():
 		#output += (str(repo) + "\n")
-		output += getRepoToStr(repo)
+		output += repoToStr(repo)
 	return output
 
 
