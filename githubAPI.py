@@ -6,5 +6,7 @@ def getUserData(username):
 	userData = requests.get(url).json()
 	return userData
 
-pprint(getUserData("Seyekt")) 
+username = input("Enter GitHub username: ")
+
+pprint(getUserData(username)) 
 
